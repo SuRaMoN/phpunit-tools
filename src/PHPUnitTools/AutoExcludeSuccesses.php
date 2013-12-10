@@ -2,14 +2,23 @@
 
 namespace PHPUnitTools;
 
-use \PHPUnit_Framework_TestListener;
-use \PHPUnit_Framework_Test;
-use \PHPUnit_Framework_TestSuite;
-use \PHPUnit_Framework_AssertionFailedError;
-use \ReflectionObject;
-use \Exception;
+use Exception;
+use PHPUnit_Framework_AssertionFailedError;
+use PHPUnit_Framework_Test;
+use PHPUnit_Framework_TestListener;
+use PHPUnit_Framework_TestSuite;
+use ReflectionObject;
 
 
+/**
+ *	<listeners>
+ *		<listener class="PHPUnitTools\AutoExcludeSuccesses" file="vendor/phpunit-tools/src/PHPUnitTools/AutoExcludeSuccesses.php">
+ *			<arguments>
+ *				<string>phpunit.xml.dist</string>
+ *			</arguments>
+ *		</listener>
+ *	</listeners>
+ */
 class AutoExcludeSuccesses implements PHPUnit_Framework_TestListener
 {
 	protected $phpUnitXmlPath;
