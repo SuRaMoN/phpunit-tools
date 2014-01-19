@@ -1,0 +1,15 @@
+
+{
+	"name": "suramon/phpunit-tools",
+	"description": "Small collection of useful phpunit tools/utilies",
+	"type": "library",
+	"homepage": "https://github.com/SuRaMoN/phpunit-tools",
+	"license": "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE",
+	"authors": [
+		{
+			"name": "SuRaMoN",
+			"homepage": "https://github.com/SuRaMoN"
+		}
+	]
+}
+
