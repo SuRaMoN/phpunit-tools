@@ -2,12 +2,11 @@
 
 namespace PHPUnitTools;
 
-use PHPUnit_Framework_TestListener;
-use PHPUnit_Framework_Test;
-use PHPUnit_Framework_TestSuite;
-use PHPUnit_Framework_AssertionFailedError;
 use Exception;
-
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Test;
+use PHPUnit\Framework\TestSuite;
+use PHPUnit\Framework\Warning;
 
 /**
  *  <listeners>
@@ -18,7 +17,7 @@ use Exception;
  *      </listener>
  *  </listeners>
  */
-class PersistentErrorReporting implements PHPUnit_Framework_TestListener
+class PersistentErrorReporting implements \PHPUnit\Framework\TestListener
 {
     protected $errorLevel;
 
@@ -27,17 +26,18 @@ class PersistentErrorReporting implements PHPUnit_Framework_TestListener
         $this->errorLevel = eval("return $errorLevel;");
     }
 
-    public function startTest(PHPUnit_Framework_Test $test)
+    public function startTest(Test $test)
     {
         error_reporting($this->errorLevel);
     }
 
-    public function addError(PHPUnit_Framework_Test $test, Exception $e, $time) { }
-    public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time) { }
-    public function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time) { }
-    public function addRiskyTest(PHPUnit_Framework_Test $test, Exception $e, $time) { }
-    public function addSkippedTest(PHPUnit_Framework_Test $test, Exception $e, $time) { }
-    public function endTest(PHPUnit_Framework_Test $test, $time) { }
-    public function endTestSuite(PHPUnit_Framework_TestSuite $suite) { }
-    public function startTestSuite(PHPUnit_Framework_TestSuite $suite) { }
+    public function addError(Test $test, Exception $e, $time) { }
+    public function addFailure(Test $test, AssertionFailedError $e, $time) { }
+    public function addIncompleteTest(Test $test, Exception $e, $time) { }
+    public function addRiskyTest(Test $test, Exception $e, $time) { }
+    public function addSkippedTest(Test $test, Exception $e, $time) { }
+    public function endTest(Test $test, $time) { }
+    public function endTestSuite(TestSuite $suite) { }
+    public function startTestSuite(TestSuite $suite) { }
+    public function addWarning(Test $test, Warning $e, $time) { }
 }
