@@ -2,13 +2,13 @@
 
 namespace PHPUnitTools;
 
-use PHPUnit_Framework_TestListener;
-use PHPUnit_Framework_Test;
-use PHPUnit_Framework_TestSuite;
-use PHPUnit_Framework_AssertionFailedError;
-use ReflectionObject;
 use Exception;
-
+use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Test;
+use PHPUnit\Framework\TestListener;
+use PHPUnit\Framework\TestSuite;
+use PHPUnit\Framework\Warning;
+use ReflectionObject;
 
 /**
  *  <listeners>
@@ -19,7 +19,7 @@ use Exception;
  *      </listener>
  *  </listeners>
  */
-class ExecutionTimeListener implements PHPUnit_Framework_TestListener
+class ExecutionTimeListener implements TestListener
 {
     protected $startTime;
     protected $fileHandle;
@@ -34,22 +34,46 @@ class ExecutionTimeListener implements PHPUnit_Framework_TestListener
         fclose($this->fileHandle);
     }
 
-    public function startTest(PHPUnit_Framework_Test $test)
+    public function startTest(Test $test)
     {
         $this->startTime = microtime(true);
     }
 
-    public function endTest(PHPUnit_Framework_Test $test, $time)
+    public function endTest(Test $test, $time)
     {
         $elapsedTime = microtime(true) - $this->startTime;
         fputcsv($this->fileHandle, array($test->toString(), $elapsedTime));
     }
 
-    public function addError(PHPUnit_Framework_Test $test, Exception $e, $time) { }
-    public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time) { }
-    public function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time) { }
-    public function addRiskyTest(PHPUnit_Framework_Test $test, Exception $e, $time) { }
-    public function addSkippedTest(PHPUnit_Framework_Test $test, Exception $e, $time) { }
-    public function endTestSuite(PHPUnit_Framework_TestSuite $suite) { }
-    public function startTestSuite(PHPUnit_Framework_TestSuite $suite) { }
-} 
+    public function addError(Test $test, Exception $e, $time)
+    {
+    }
+
+    public function addWarning(Test $test, Warning $e, $time)
+    {
+    }
+
+    public function addFailure(Test $test, AssertionFailedError $e, $time)
+    {
+    }
+
+    public function addIncompleteTest(Test $test, Exception $e, $time)
+    {
+    }
+
+    public function addRiskyTest(Test $test, Exception $e, $time)
+    {
+    }
+
+    public function addSkippedTest(Test $test, Exception $e, $time)
+    {
+    }
+
+    public function endTestSuite(TestSuite $suite)
+    {
+    }
+
+    public function startTestSuite(TestSuite $suite)
+    {
+    }
+}
